@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CS2 Upgrader — Prototype</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ============ ЭКРАН АВТОРИЗАЦИИ ============ -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-box">
+      <h1 class="logo">CS2 <span>UPGRADER</span></h1>
+      <p class="subtitle">Войдите или создайте аккаунт</p>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="login">Вход</button>
+        <button class="tab" data-tab="register">Регистрация</button>
+      </div>
+
+      <form id="loginForm" class="auth-form active">
+        <input type="email" id="loginEmail" placeholder="Email" required />
+        <input type="password" id="loginPassword" placeholder="Пароль" required />
+        <button type="submit" class="btn-primary">Войти</button>
+        <p class="error" id="loginError"></p>
+      </form>
+
+      <form id="registerForm" class="auth-form">
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Пароль (мин. 4 символа)" required />
+        <input type="password" id="regPassword2" placeholder="Повторите пароль" required />
+        <button type="submit" class="btn-primary">Создать аккаунт</button>
+        <p class="error" id="regError"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ ОСНОВНОЙ ИНТЕРФЕЙС ============ -->
+  <div id="app" class="app hidden">
+
+    <header class="header">
+      <div class="logo-small">CS2 <span>UPGRADER</span></div>
+      <div class="user-info">
+        <div class="balance">💰 <span id="balanceValue">1000</span> ₽</div>
+        <div class="user-email" id="userEmailDisplay"></div>
+        <button id="logoutBtn" class="btn-logout">Выйти</button>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <section class="panel inventory-panel">
+        <h2>Ваш инвентарь</h2>
+        <div class="inventory" id="inventory"></div>
+      </section>
+
+      <section class="panel upgrade-panel">
+        <h2>Апгрейд</h2>
+
+        <div class="upgrade-slots">
+          <div class="slot from-slot">
+            <div class="slot-label">Ваш скин</div>
+            <div class="slot-content" id="fromSlot">
+              <span class="empty">Выберите скин</span>
+            </div>
+            <div class="slot-price" id="fromPrice">0 ₽</div>
+          </div>
+
+          <div class="arrow">➜</div>
+
+          <div class="slot to-slot">
+            <div class="slot-label">Целевой скин</div>
+            <div class="slot-content" id="toSlot">
+              <span class="empty">Выберите цель</span>
+            </div>
+            <div class="slot-price" id="toPrice">0 ₽</div>
+          </div>
+        </div>
+
+        <div class="chance-control">
+          <label>Шанс успеха: <span id="chanceLabel">50%</span></label>
+          <input type="range" id="chanceSlider" min="5" max="95" value="50" step="5" />
+          <div class="chance-hint">Чем выше шанс — тем меньше множитель выигрыша</div>
+        </div>
+
+        <div class="multiplier">
+          Множитель: <span id="multiplierValue">x2.0</span>
+        </div>
+
+        <div class="roulette-wrapper">
+          <div class="roulette-pointer"></div>
+          <div class="roulette-track" id="rouletteTrack"></div>
+        </div>
+
+        <button id="spinBtn" class="btn-spin" disabled>НАЧАТЬ АПГРЕЙД</button>
+
+        <div class="result" id="result"></div>
+      </section>
+
+      <section class="panel market-panel">
+        <h2>Выберите цель</h2>
+        <div class="market-filters">
+          <button class="filter-btn active" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="cheap">Дешёвые</button>
+          <button class="filter-btn" data-filter="mid">Средние</button>
+          <button class="filter-btn" data-filter="expensive">Дорогие</button>
+        </div>
+        <div class="market" id="market"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
